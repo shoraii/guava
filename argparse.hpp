@@ -27,4 +27,12 @@ public:
         auto it = std::find(args.begin(), args.end(), argt);
         return !(it == args.end() || ++it == args.end());
     }
+
+    const std::string& get_arg_i(int index) const {
+        if (index >= args.size()) {
+            static const std::string empty_string("");
+            return empty_string;
+        }
+        return args[index];
+    }
 };
