@@ -1,45 +1,42 @@
 #pragma "once"
 
-#include <string>
-#include <vector>
-#include <unordered_map>
+#include "initfonts.hpp"
 
-typedef std::unordered_map<char, std::string> font_t;
-
-class FancyText {
+class FancyGen {
 private:
     std::string raw;
+    Font font;
+    text_t fancy;
 
-    std::string fancy;
+    int spacing = 0;
     bool fancied = false;
-    
-    font_t font;
-    //int style (bold, italic, underline, etc.)
-
-    std::string fancy_letter(char letter) {
-        if (font.count(letter) == 0) {
-            return std::string("") + letter;
-        }
-        return font[letter];
-    }
 
     void make_fancy() {
-        for (int i = 0; i < raw.size(); ++i) {
-            fancy += fancy_letter(raw[i]);
+        fancy.resize(font.height);
+        for (int i = 0; i < font.height; ++i) {
+            for (int j = 0; j < raw.size(); ++j) {
+                if (font.typeface.count(raw[j]) > 0) {
+                    fancy[i] += font.typeface[raw[j]][i];
+                }
+                for (int k = 0; k < spacing; ++k) {
+                    fancy[i] += " ";
+                }
+            }
         }
     }
 
 public:
-    FancyText() {
+    FancyGen() {
 
     }
 
-    FancyText(const std::string& text, const font_t& font) {
+    FancyGen(const std::string& text, const Font& font, int spacing) {
         raw = text;
         this->font = font;
+        this->spacing = spacing;
     }
 
-    const std::string& get_fancy() {
+    const text_t& get_fancy() {
         if (fancied) {
             return fancy;
         }

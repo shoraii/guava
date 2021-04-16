@@ -6,15 +6,23 @@
 int main(int argc, char ** argv) {
     ArgParse parser(argc, argv);
 
-    font_t font;
-    
-    for (char c = 'a'; c <= 'z'; ++c) {
-        font[c] = std::string("<") + c + std::string(">");
+    init_font();
+    int spacing = 0;
+    std::string sps = parser.get_arg("-sp");
+    if (sps != "") {
+        try {
+            spacing = std::stoi(sps);
+        } catch(const std::exception& e) {
+            spacing = 0;
+        }
     }
+    std::string raw = parser.get_arg("-i");
+    if (raw == "") {
+        raw = parser.get_arg_i(0);
+    }
+    FancyGen fancy_text(raw, default_font, spacing);
+    text_t fancy = fancy_text.get_fancy();
 
-    FancyText fancy_text(parser.get_arg_i(0), font);
-    std::string fancy = fancy_text.get_fancy();
-
-    std::cout << fancy << "\n";
+    std::cout << fancy;
     return 0;
 }
