@@ -15,8 +15,12 @@ private:
         fancy.resize(font.height);
         for (int i = 0; i < font.height; ++i) {
             for (int j = 0; j < raw.size(); ++j) {
-                if (font.typeface.count(raw[j]) > 0) {
-                    fancy[i] += font.typeface[raw[j]][i];
+                char to_print = raw[j];
+                if (!font.case_sensitive) {
+                    to_print = std::tolower(to_print);
+                }
+                if (font.typeface.count(to_print) > 0) {
+                    fancy[i] += font.typeface[to_print][i];
                 }
                 for (int k = 0; k < spacing; ++k) {
                     fancy[i] += " ";

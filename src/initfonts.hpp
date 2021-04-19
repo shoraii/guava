@@ -15,6 +15,7 @@ Font default_font;
 void init_font() {
     default_font.name = "default";
     default_font.height = 4;
+    default_font.case_sensitive = false;
     default_font.typeface['a'].push_back("   db   ");
     default_font.typeface['a'].push_back("  dPYb  ");
     default_font.typeface['a'].push_back(" dP__Yb ");
