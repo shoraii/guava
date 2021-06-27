@@ -38,7 +38,7 @@ void init_font() {
     default_font.typeface['e'].push_back("888888");
     default_font.typeface['f'].push_back("888888");
     default_font.typeface['f'].push_back("88__  ");
-    default_font.typeface['f'].push_back("88\"\"");
+    default_font.typeface['f'].push_back("88\"\"  ");
     default_font.typeface['f'].push_back("88    ");
     default_font.typeface['g'].push_back(" dP\"\"b8");
     default_font.typeface['g'].push_back("dP   `\"");
